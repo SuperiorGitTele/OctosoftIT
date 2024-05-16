@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrier Identifier</title>
+    <link rel="stylesheet" href="carrier.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Carrier Identifier</h1>
+      <div class="carrier-logos">
+        <img src="mtn.png" alt="MTN" />
+        <img src="glo.jpg" alt="Glo" />
+        <img src="airtel.png" alt="Airtel" />
+      </div>
+      <div class="search-container">
+        <input id="phone-number" type="tel" placeholder="Enter phone number" />
+        <button id="identify-button">Identify Carrier</button>
+        <div id="result"></div>
+        <div class="searching-animation">
+          <img src="loader.jpg" alt="Searcher" />
+        </div>
+      </div>
+    </div>
+
+    <script src="carrier.js"></script>
+  </body>
+</html>
