@@ -12,7 +12,7 @@ async function fetchUserApi() {
 
     // console.log(await fetchUserApi('https://randomuser.me/api/?results=40'));
     for (const data4 of data) {
-      // console.log(data4);
+      console.log(data4.picture.medium);
       const selectedFilter = filterSelect.value;
       let filteredData;
 

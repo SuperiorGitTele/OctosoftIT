@@ -6,51 +6,36 @@ async function fetchUserApi() {
   try {
     const response = await fetch("https://randomuser.me/api/?results=40");
     const data = await response.json();
-    console.log(data);
 
-    userList.innerHTML = "";
+    const selectedFilter = filterSelect.value;
 
-    // console.log(await fetchUserApi('https://randomuser.me/api/?results=40'));
-    for (const data4 of data.results) {
-      // console.log(data4);
-      const selectedFilter = filterSelect.value;
-      let filteredData;
-
+    
+    const filteredUsers = data.results.filter(user => {
       switch (selectedFilter) {
         case "male":
-          if (data4.gender === "male") {
-            filteredData = `Name: ${data4.name.title} ${data4.name.first} ${data4.name.last}, Age: ${data4.dob.age}, <img src="${data4.picture.medium}" alt="${data4.name.first}">`;
-          }
-          break;
-
+          return user.gender === "male";
         case "female":
-          if (data4.gender === "female") {
-            filteredData = `Name: ${data4.name.title} ${data4.name.first} ${data4.name.last}, Age: ${data4.dob.age}, <img src="${data4.picture.medium}" alt="${data4.name.first}">`;
-          }
-          break;
-
+          return user.gender === "female";
         case "above30":
-          if (data4.dob.age > 30) {
-            filteredData = `Name: ${data4.name.title} ${data4.name.first} ${data4.name.last}, Age: ${data4.dob.age}, <img src="${data4.picture.medium}" alt="${data4.name.first}">`;
-          }
-          break;
-
+          return user.dob.age > 30;
         default:
-          filteredData = `Name: ${data4.name.title} ${data4.name.first} ${data4.name.last}, Age: ${data4.dob.age}<br> <img src="${data4.picture.medium}" alt="${data4.name.first}">`;
+          return true; 
       }
+    });
 
+    
+    userList.innerHTML = "";
+
+    
+    filteredUsers.forEach(user => {
       const li = document.createElement("li");
-      li.innerHTML = filteredData;
-
+      li.innerHTML = `Name: ${user.name.title} ${user.name.first} ${user.name.last}, Age: ${user.dob.age}, <br><img src="${user.picture.medium}" alt="${user.name.first}">`;
       userList.appendChild(li);
-    }
-
-    return data;
+    });
   } catch (error) {
     console.log("Error Detected:", error);
   }
 }
 
-// console.log(filterUsers());
 fetchButton.addEventListener("click", fetchUserApi);
 filterSelect.addEventListener("change", fetchUserApi);
